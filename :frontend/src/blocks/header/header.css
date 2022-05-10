@@ -1,0 +1,51 @@
+.header {
+  max-width: 880px;
+  border-bottom: 1px solid rgba(84, 84, 84, 1);
+  margin: 45px auto 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.heder__subtitle{
+font-family: Inter;
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 22px;
+text-align: right;
+
+color: #FFFFFF;
+}
+
+
+.header__logout{
+  text-decoration: none;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height, or 122% */
+  
+  text-align: right;
+  margin-left: 23px;
+  color: #A9A9A9;
+  
+  }
+  .header__logout:hover {
+    opacity: 0.6;
+  }
+  
+
+
+@media screen and (max-width: 900px) {
+  .header {
+    box-sizing: border-box;
+    padding-left: 27px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .header {
+    margin: 28px auto 38.25px;
+  }
+}
