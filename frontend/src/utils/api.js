@@ -107,11 +107,11 @@ updateToken
 //Token: 2dbf8d5b-1a4e-4959-a937-202ce5167a76 Group ID: group-12
 
   const api = new Api({
-    baseUrl: `https://around.nomoreparties.co/v1/group-12`,
-    // baseUrl: `http://localhost:3000`,
+    // baseUrl: `https://around.nomoreparties.co/v1/group-12`,
+    baseUrl: `http://localhost:3000`,
     headers: {
-        // authorization:`Bearer ${localStorage.getItem("jwt")}`,
-        authorization:`2dbf8d5b-1a4e-4959-a937-202ce5167a76`,
+        authorization:`Bearer ${localStorage.getItem("jwt")}`,
+        // authorization:`2dbf8d5b-1a4e-4959-a937-202ce5167a76`,
         "Content-Type": "application/json"
     }
 });
