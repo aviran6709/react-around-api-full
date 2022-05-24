@@ -96,7 +96,12 @@ const customFetch = (url, headers) => {
             }
         )
     }
-updateToken
+updateToken = () => {
+    this.headers = {
+        authorization:`Bearer ${localStorage.getItem("jwt")}`,
+        "Content-Type": "application/json"
+    }
+}
 
 
     //end of class

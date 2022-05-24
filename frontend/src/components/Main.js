@@ -48,7 +48,7 @@ export default function Main({
       </section>
 
       <section className="cards">
-        {cards.map((card) => {
+        {cards ? cards.map((card) => {
           return (
             <Card
               cardData={card}
@@ -58,7 +58,7 @@ export default function Main({
               onDeleteCard={handleCardDelete}
             />
           );
-        })}
+        }) :""}
       </section>
     </main>
   );

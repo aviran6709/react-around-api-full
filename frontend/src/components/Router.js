@@ -6,6 +6,7 @@ import {  Routes,Route } from 'react-router-dom';
 import * as auth from "../utils/auth";
 import {  useNavigate } from 'react-router-dom';
 import App  from './App';
+import api from '../utils/api.js';
 const Router = () =>{
 const [loggedIn, setLoggedIn] = React.useState(false);
 const [email, setEmail] = React.useState("");
@@ -46,12 +47,11 @@ const handelLogin =(newMail)=>{
 const handelLoginSubmit =({email,password})=>{
   auth.login(email, password)
             .then((data) => {
-
+        
                 if (data.token) {
                     localStorage.setItem('jwt', data.token);
+                    api.updateToken()
                     handelLogin(email)
-                    setToken(data.token)
-
                 }
                 if (data.status === 400) {
                     console.log(" one or more of the fields were not provided ")
@@ -69,8 +69,6 @@ const handelLoginSubmit =({email,password})=>{
 React.useEffect(() => {
   tokenCheck()
 }, []);
-
-
 
     return  (
     <Routes>
