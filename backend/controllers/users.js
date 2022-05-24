@@ -1,6 +1,9 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs'); // importing bcrypt
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 let userId;
 const login = (req, res) => {
   const { email, password } = req.body;
@@ -22,13 +25,12 @@ const login = (req, res) => {
         return Promise.reject(new Error('Incorrect password or email'));
       }
 
-      const token = jwt.sign({ _id: userId }, 'some-secret-key', {
-        expiresIn: '7d',
-      });
+    res.send({ token: jwt.sign({ _id: userId  }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' }) })
       // successful authentication
 
-      res.send({ message: 'wellcome!', token: token });
+
     })
+  
     .catch((err) => {
       res.status(401).send({ message: err.message });
     });

@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const users = require('./routes/users');
@@ -14,6 +15,13 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 mongoose.connect('mongodb://localhost:27017/mydb', {
   useNewUrlParser: true,
 });
+
+
+
+// using CORS
+app.use(cors());
+app.options('*', cors());
+
 
 app.use(bodyParser.json());
 
