@@ -12,9 +12,9 @@ const [email, setEmail] = React.useState("");
 const [token, setToken] = React.useState("");
 const navigate = useNavigate();
 
-const handelLogin =(email)=>{
+const handelLogin =(newMail)=>{
   setLoggedIn(true)
-  setEmail(email)
+  setEmail(newMail)
   navigate("/");
 }
 // const handelLogout =()=>{
@@ -22,6 +22,7 @@ const handelLogin =(email)=>{
 // }
  const tokenCheck=()=>{
   const jwt = localStorage.getItem('jwt');
+  
   if (jwt) {
     auth.checkToken(jwt).then((res) => {
       if(res.status === 400) {  
@@ -31,12 +32,11 @@ const handelLogin =(email)=>{
         console.log( "The provided token is invalid")
     }
       if (res) {
-        handelLogin()
-        setEmail(res.data.email)
-        navigate("/");
+        handelLogin(res.data.email);
       }
-    }).catch(err => {console.log(err)
-    localStorage.clear()
+    }).catch(err => {
+      console.log(err)
+      localStorage.clear()
     });;
   }
 

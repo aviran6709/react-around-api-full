@@ -25,6 +25,7 @@ const login = (req, res) => {
         return Promise.reject(new Error('Incorrect password or email'));
       }
 
+      
     res.send({ token: jwt.sign({ _id: userId  }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' }) })
       // successful authentication
 
@@ -109,7 +110,7 @@ const getUserInfo = (req, res) => {
   User.findById(req.user._id)
     .then((user) => {
       if (user) {
-        console.log(user);
+        
         res.send({ data: user });
       } else {
         res.status(404).send({ message: 'User Not Found' });
