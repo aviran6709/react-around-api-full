@@ -108,7 +108,7 @@ updateToken
 
   const api = new Api({
     // baseUrl: `https://around.nomoreparties.co/v1/group-12`,
-    baseUrl: `http://localhost:3000`,
+    baseUrl: `http://api.aroundus.students.nomoreparties.sbs`,
     headers: {
         authorization:`Bearer ${localStorage.getItem("jwt")}`,
         // authorization:`2dbf8d5b-1a4e-4959-a937-202ce5167a76`,
