@@ -11,7 +11,7 @@ export default function Main({
   handleCardLike,
   handleCardDelete
 }) {
-  const { name, about, avatar }  = React.useContext(CurrentUserContext);
+  const {name,avatar,about}  = React.useContext(CurrentUserContext);
 
   return (
     <main className="main">

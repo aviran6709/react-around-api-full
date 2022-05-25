@@ -2,17 +2,9 @@ const Card = require('../models/card');
 const erorrNotFound = require('../Error/errorNotFound');
 const errorInvalidData = require('../Error/errorInvalidData');
 
-// module.exports.getCards = (req, res) => {
-//   Card.find({})
-//     .populate('owner')
-//     .populate('likes')
-//     .then((cards) => {
-//       res.send({ data: cards });
-//     })
-//     .catch(next)
-// };
+
 module.exports.getCards = (req, res) => {
-  Card.find({})
+  Card.find({}).populate('likes')
     .then((cards) => res.send(cards))
     .catch((err) => res.status(err.statusCode).send({ message: err.message }));
 };
@@ -34,6 +26,10 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCard = (req, res) => {
+  //(if req.params.cardId , req.user._id)
+  //to do , req.params.cardId is card's id , req.user._id is users id 
+  //find card in collection (modal) if found check if owner is equal req.user._id if yes delete 
+  // if not throw you are a not the user.
   Card.findByIdAndRemove(req.params.cardId)
     .then((card) => {
       if (card) {

@@ -1,5 +1,5 @@
 .popup__img-big {
-  width: 75vw;
+  max-width: 75vw;
   height: 75vh;
   margin: auto;
 }

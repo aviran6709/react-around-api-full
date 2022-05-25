@@ -2,21 +2,28 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import React from "react";
 const Card = (props) => {
   const currentUser = React.useContext(CurrentUserContext);
-  const isLiked = props.cardData.likes.some((i) => i._id === currentUser._id);
-  const cardLikeButtonClassName = isLiked ? "card__like-button_dark" : "";
-  const isOwn = props.cardData.owner._id === currentUser._id;
+// console.log(props.cardData.likes)
+
+  const isOwn = props.cardData.owner === currentUser._id;
   const cardDeleteButtonClassName = `card__delete-button ${
     isOwn ? "card__delete-button_visible" : "card__delete-button_hidden"
   }`;
+  
+    const isLiked= props.cardData.likes && props.cardData.likes.some((c)=>c._id === currentUser._id);
+   
+
+
   return (
+    
     <div className="card">
-      <button
+      {isOwn ?(<button
         type="button"
         onClick={() => {
           props.onDeleteCard(props.cardData._id);
         }}
         className={cardDeleteButtonClassName}
-      ></button>
+      ></button>): ""}
+     
       <img
         className="card__image"
         src={props.cardData.link}
@@ -28,11 +35,16 @@ const Card = (props) => {
         <div className="card__like_column">
           <button
             type="button"
-            onClick={() => props.onCardLike(props.cardData)}
-            className={`card__like-button ${cardLikeButtonClassName}`}
-          ></button>
+            onClick={() => {
+              props.onCardLike(props.cardData)
+              
+            }
+            }
+            className={`card__like-button ${isLiked ? "card__like-button_dark":""}`}
+            ></button>
+            
           <span className="card__likes">
-            {props.cardData.likes.length > 0 ? props.cardData.likes.length : ""}
+            { props.cardData.likes && props.cardData.likes.length > 0 ? props.cardData.likes.length : ""}
           </span>
         </div>
       </div>

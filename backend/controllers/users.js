@@ -137,7 +137,10 @@ const updateUserAvatar = (req, res) => {
       runValidators: true,
     }
   )
-    .then((user) => res.send({ data: user }))
+    .then((user) => {res.send({ data: user })
+  console.log(user);
+  }
+    )
     .catch((err) => {
       if (err.name === 'ValidationError') {
         res.status(400).send({ message: 'User Validation Failed' });

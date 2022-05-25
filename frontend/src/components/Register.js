@@ -83,7 +83,7 @@ const handleChange=(e)=> {
                     </input>
 
                     <button className={" popup__button  popup__button_them_black"} type="submit">
-                    Sing up
+                    Sign up
                     </button>
                 </form>
 

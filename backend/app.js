@@ -19,13 +19,24 @@ mongoose.connect('mongodb://localhost:27017/mydb', {
 
 
 // using CORS
-app.use(cors());
-app.options('*', cors());
 
+const corsOptions = {
+  origin: ["http://www.aroundus.students.nomoreparties.sbs","http://aroundus.students.nomoreparties.sbs"],
+  optionsSuccessStatus: 200 
+  }
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
 app.use(requestLogger);
+
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Server will crash now');
+  }, 0);
+}); 
 
 app.post(
   '/signin',
@@ -61,5 +72,5 @@ app.use(errors());
 app.use(errorHandlers);
 
 app.listen(PORT, () => {
-  console.log('link to server');
+  console.log(`link to server on ${PORT}` );
 });

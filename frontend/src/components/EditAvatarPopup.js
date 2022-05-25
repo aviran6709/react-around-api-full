@@ -5,6 +5,7 @@ function EditAvatarPopup(props) {
   const picRef = React.useRef();
   function handleSubmit(e) {
     e.preventDefault();
+    console.log( picRef.current.value);
     props.onUpdateAvatar({
       avatar: picRef.current.value,
     });

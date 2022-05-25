@@ -10,6 +10,7 @@
   position: absolute;
   right: 15px;
   top: 18px;
+  filter:drop-shadow(2px 4px 6px #000);
   cursor: pointer;
   transition: ease-in 1s;
   

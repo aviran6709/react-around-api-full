@@ -11,7 +11,7 @@ const customFetch = (url, headers) => {
         this.headers = headers;
 
     }
-    //get arry of cards obj from server
+    //get array of cards obj from server
     getCard = () => {
         return customFetch(`${this.baseUrl}/cards`, { headers: this.headers })
 
@@ -35,29 +35,10 @@ const customFetch = (url, headers) => {
 
     }
 
-    //card like requset
-    cardLikeRequset = (cardId) => {
-        return customFetch(`${this.baseUrl}/cards/likes/${cardId}`,
-            {
-                method: "PUT",
-                headers: this.headers,
-            }
-        )
-    }
-
-    //unlike card req from server
-    cardUnLikeRequset = (cardId) => {
-        return customFetch(`${this.baseUrl}/cards/likes/${cardId}`,
-            {
-                method: "DELETE",
-                headers: this.headers,
-            }
-        )
-    }
-
+  
 
     changeLikeCardStatus = (cardId, isLiked) => {
-        return customFetch(`${this.baseUrl}/cards/likes/${cardId}`,
+        return customFetch(`${this.baseUrl}/cards/${cardId}/likes`,
             {
                 method:`${isLiked ? "PUT" : "DELETE"}`,
                 headers: this.headers,
@@ -68,6 +49,7 @@ const customFetch = (url, headers) => {
 
     // requset to chenge profile pic 
     setUserPicUrl = (data) => {
+        console.log(data);
         return customFetch(`${this.baseUrl}/users/me/avatar`, {
             method: "PATCH",
             headers: this.headers,
@@ -113,8 +95,8 @@ updateToken = () => {
 
   const api = new Api({
     // baseUrl: `https://around.nomoreparties.co/v1/group-12`,
-    baseUrl: `http://api.aroundus.students.nomoreparties.sbs`,
-    //baseUrl: `http://localhost:3000`,
+    // baseUrl: `http://api.aroundus.students.nomoreparties.sbs`,
+    baseUrl: `http://localhost:3000`,
     headers: {
         authorization:`Bearer ${localStorage.getItem("jwt")}`,
         // authorization:`2dbf8d5b-1a4e-4959-a937-202ce5167a76`,

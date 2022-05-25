@@ -23,7 +23,8 @@ function App({email}) {
 
   function getCurrentData() {
     api.getUserInfo().then((res) => {
-        setCurrentUser(res);
+   
+        setCurrentUser(res.data);
     }).catch(console.log);
   }
   function setCurrentData(info) {
@@ -31,14 +32,15 @@ function App({email}) {
       .setUserInfoToServer(info)
       .then((res) => {
         closeAllPopups()
-        setCurrentUser(res);
+        setCurrentUser(res.data);
+       
       }).catch(console.log)
   }
   function handleUpdateAvatar(info) {
     api
       .setUserPicUrl(info)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
         closeAllPopups()
       }).catch(console.log)
   }
@@ -98,13 +100,14 @@ function App({email}) {
 
 
   function getCards() {
-    api.getCard().then((res) => setCards(res)).catch(console.log);
+    api.getCard().then((res) => setCards(res.reverse())).catch(console.log);
   }
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     // Send a request to the API and getting the updated card data
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+      console.log(!isLiked);
+      setCards((state) => state.map((c) => (c._id === card._id ? newCard.data : c)));
     }).catch(console.log);;
   }
 
