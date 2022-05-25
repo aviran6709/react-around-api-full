@@ -21,7 +21,7 @@ mongoose.connect('mongodb://localhost:27017/mydb', {
 // using CORS
 
 const corsOptions = {
-  origin: ["http://www.aroundus.students.nomoreparties.sbs","http://aroundus.students.nomoreparties.sbs"],
+  origin: ["https://www.aroundus.students.nomoreparties.sbs","https://aroundus.students.nomoreparties.sbs" ,"http://www.aroundus.students.nomoreparties.sbs","http://aroundus.students.nomoreparties.sbs"],
   optionsSuccessStatus: 200 
   }
 
