@@ -1,5 +1,5 @@
 // export const BASE_URL = "https://register.nomoreparties.co";
- export const BASE_URL = `http://api.aroundus.students.nomoreparties.sbs`
+ export const BASE_URL = `https://api.aroundus.students.nomoreparties.sbs`
 // export const BASE_URL = `http://localhost:3000`
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {

@@ -95,7 +95,7 @@ updateToken = () => {
 
   const api = new Api({
     // baseUrl: `https://around.nomoreparties.co/v1/group-12`,
-    baseUrl: `http://api.aroundus.students.nomoreparties.sbs`,
+    baseUrl: `https://api.aroundus.students.nomoreparties.sbs`,
     // baseUrl: `http://localhost:3000`,
     headers: {
         authorization:`Bearer ${localStorage.getItem("jwt")}`,
