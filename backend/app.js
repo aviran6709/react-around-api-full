@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 const { celebrate, Joi } = require('celebrate');
 const errorHandlers = require('./middlewares/errorHandlers');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const errorNotFound = require('./Error/errorNotFound');
 mongoose.connect('mongodb://localhost:27017/mydb', {
   useNewUrlParser: true,
 });
@@ -25,7 +26,7 @@ const corsOptions = {
   optionsSuccessStatus: 200 
   }
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(bodyParser.json());
 
@@ -63,9 +64,7 @@ app.post(
 // app.use(auth);
 app.use('/users', auth, users);
 app.use('/cards', auth, cards);
-app.get('*', (req, res) =>
-  res.status(404).send({ message: 'Requested Resource Not Found ' })
-);
+app.get('*', () =>{throw new errorNotFound("page not found 404")})
 
 app.use(errorLogger);
 app.use(errors());

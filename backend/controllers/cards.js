@@ -1,7 +1,7 @@
 const Card = require('../models/card');
-const erorrNotFound = require('../Error/errorNotFound');
+const errorNotFound = require('../Error/errorNotFound');
 const errorInvalidData = require('../Error/errorInvalidData');
-
+const errorHandler = require("../middlewares/errorHandlers")
 
 module.exports.getCards = (req, res) => {
   Card.find({}).populate('likes')
@@ -15,7 +15,7 @@ module.exports.createCard = (req, res, next) => {
   Card.create({ name, link, owner })
     .then((card) => res.send(card))
     .catch((err) => {
-      console.log(err);
+   
       if (err.name === 'ValidationError') {
         console.log(err);
         throw new errorInvalidData('invalid data passed to the server');
@@ -26,23 +26,22 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCard = (req, res) => {
-  //(if req.params.cardId , req.user._id)
-  //to do , req.params.cardId is card's id , req.user._id is users id 
-  //find card in collection (modal) if found check if owner is equal req.user._id if yes delete 
-  // if not throw you are a not the user.
+
   Card.findByIdAndRemove(req.params.cardId)
     .then((card) => {
       if (card) {
         res.send({ data: card });
       } else {
-        res.status(404).send({ message: 'Card Not Found' });
+        throw new errorNotFound( 'Card Not Found' );
       }
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        res.status(400).send({ message: 'Invalid Card Id' });
+        throw new InvalidDataError(  'Invalid Card Id' );
+      
       } else {
-        res.status(500).send({ message: ' Server Error' });
+        throw new errorHandler( ' Server Error');
+       
       }
     });
 };
@@ -58,14 +57,15 @@ module.exports.likeCard = (req, res) => {
       if (card) {
         res.send({ data: card });
       } else {
-        res.status(404).send({ message: 'Card Not Found' });
+        throw new errorNotFound( 'Card Not Found' );
       }
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        res.status(400).send({ message: 'Invalid Card Id' });
+        
+        throw new InvalidDataError(  'Invalid Card Id' );
       } else {
-        res.status(500).send({ message: 'Server Error' });
+        throw new errorHandler( ' Server Error');
       }
     });
 };
@@ -81,14 +81,14 @@ module.exports.dislikeCard = (req, res) => {
       if (card) {
         res.send({ data: card });
       } else {
-        res.status(404).send({ message: 'Card Not Found' });
+        throw new errorNotFound( 'Card Not Found' );
       }
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        res.status(400).send({ message: 'Invalid Card Id' });
+        throw new InvalidDataError(  'Invalid Card Id' );
       } else {
-        res.status(500).send({ message: 'Server Error' });
+        throw new errorHandler( ' Server Error')
       }
     });
 };

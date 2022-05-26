@@ -11,7 +11,7 @@
     display: flex;
     row-gap: 0px;
     column-gap: 0px;
-    max-width: calc(196px + 28px);
+    max-width:(520px);
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
@@ -21,4 +21,11 @@
   width: 880px;
   display: flex;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 630px) {
+  .profile__container{
+   max-width:530px
+  }
+
 }

@@ -33,7 +33,7 @@ const login = (req, res) => {
     })
   
     .catch((err) => {
-      res.status(401).send({ message: err.message });
+      throw new errorInvalidData('invalid data passed to the server');
     });
 };
 
@@ -43,7 +43,7 @@ const getUsers = (req, res) => {
       res.send({ data: users });
     })
     .catch(() => {
-      res.status(500).send({ message: 'Internal Server Error' });
+      throw new errorHandler( ' Server Error')
     });
 };
 
@@ -60,7 +60,7 @@ const getUserById = (req, res) => {
       if (err.name === 'CastError') {
         res.status(400).send({ message: 'Invalid User Id' });
       } else {
-        res.status(500).send({ message: 'Internal Server Error' });
+        throw new errorHandler( ' Server Error')
       }
     });
 };
@@ -78,9 +78,10 @@ const createUser = (req, res) => {
     .then((newUser) => res.send({ data: newUser }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        res.status(400).send({ message: 'User Validation Failed' });
+        
+        throw new errorInvalidData('User Validation Failed');
       } else {
-        res.status(500).send({ message: 'Server Error' });
+        throw new errorHandler( ' Server Error')
       }
     });
 };
@@ -98,9 +99,10 @@ const updateUser = (req, res) => {
     .then((user) => res.send({ data: user }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        res.status(400).send({ message: 'User Validation Failed' });
+
+    throw new errorInvalidData('User Validation Failed');
       } else {
-        res.status(500).send({ message: 'Internal Server Error' });
+        throw new errorHandler( ' Server Error')
       }
     });
 };
@@ -118,9 +120,9 @@ const getUserInfo = (req, res) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        res.status(400).send({ message: 'Invalid User Id' });
+        throw new errorInvalidData('Invalid User Id');
       } else {
-        res.status(500).send({ message: 'Internal Server Error' });
+        throw new errorHandler( ' Server Error')
       }
     });
 };
@@ -143,9 +145,10 @@ const updateUserAvatar = (req, res) => {
     )
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        res.status(400).send({ message: 'User Validation Failed' });
+        throw new errorInvalidData('User Validation Failed');
+      
       } else {
-        res.status(500).send({ message: 'Internal Server Error' });
+        throw new errorHandler( ' Server Error')
       }
     });
 };
